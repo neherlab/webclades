@@ -2,8 +2,8 @@ import React from 'react'
 import { Popover, PopoverBody } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 
-import type { AnalysisResult } from '@neherlab/nextclade-algorithms'
-import type { QCResult } from '@neherlab/nextclade-algorithms'
+import type { AnalysisResult, QCResult } from '@neherlab/nextclade-algorithms'
+
 import { getSafeId } from 'src/helpers/getSafeId'
 import { ListOfGaps } from 'src/components/Results/ListOfGaps'
 import { ListOfMissing } from 'src/components/Results/ListOfMissing'

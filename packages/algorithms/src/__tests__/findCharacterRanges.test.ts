@@ -1,4 +1,4 @@
-import { A, GOOD_NUCLEOTIDES, T } from 'src//nucleotides'
+import { A, GOOD_NUCLEOTIDES, T } from 'src/nucleotides'
 
 import { findNucleotideRanges } from '../findNucleotideRanges'
 

@@ -1,13 +1,14 @@
 import actionCreatorFactory from 'typescript-fsa'
 
-import type { AnalysisResult } from '@neherlab/nextclade-algorithms'
 import type {
+  AnalysisResult,
   FinalizeTreeParams,
   FinalizeTreeResults,
   LocateInTreeParams,
   LocateInTreeResults,
+  QCResult,
 } from '@neherlab/nextclade-algorithms'
-import type { QCResult } from '@neherlab/nextclade-algorithms'
+
 import type { Sorting } from 'src/helpers/sortResults'
 import type { AlgorithmGlobalStatus, InputFile } from './algorithm.state'
 

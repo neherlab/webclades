@@ -6,9 +6,18 @@ import { push } from 'connected-next-router'
 import { Pool } from 'threads'
 import { call, all, getContext, put, select, takeEvery } from 'typed-redux-saga'
 
-import type { AnalysisParams, AnalysisResult } from '@neherlab/nextclade-algorithms'
-import type { FinalizeTreeParams, LocateInTreeParams } from '@neherlab/nextclade-algorithms'
-import type { QCResult, QCRulesConfig, RunQCParams } from '@neherlab/nextclade-algorithms'
+import type {
+  AnalysisParams,
+  AnalysisResult,
+  FinalizeTreeParams,
+  LocateInTreeParams,
+  QCResult,
+  QCRulesConfig,
+  RunQCParams,
+} from '@neherlab/nextclade-algorithms'
+
+import { createStateFromQueryOrJSONs } from 'auspice/src/actions/recomputeReduxState'
+
 import type { WorkerPools } from 'src/workers/types'
 import type { ParseThread } from 'src/workers/worker.parse'
 import type { AnalyzeThread } from 'src/workers/worker.analyze'
@@ -25,6 +34,7 @@ import { saveFile } from 'src/helpers/saveFile'
 import { serializeResultsToAuspiceJsonV2, serializeResultsToCsv, serializeResultsToJson } from 'src/io/serializeResults'
 import { setShowInputBox } from 'src/state/ui/ui.actions'
 import { auspiceStartClean } from 'src/state/auspice/auspice.actions'
+import { readFile } from 'src/helpers/readFile'
 import {
   algorithmRunTrigger,
   analyzeAsync,
@@ -42,7 +52,6 @@ import {
 } from './algorithm.actions'
 import { selectParams, selectResults } from './algorithm.selectors'
 import { AlgorithmGlobalStatus } from './algorithm.state'
-import { readFile } from 'src/helpers/readFile'
 
 export interface RunParams extends WorkerPools {
   rootSeq: string
@@ -118,7 +127,7 @@ export interface ParseParams {
 export function* parseSaga({ threadParse, input }: ParseParams) {
   yield* put(parseAsync.started())
   try {
-    const newInput = maybeReadFile(input)
+    const newInput = yield* call(maybeReadFile, input)
     const parsedSequences = yield* call(threadParse, newInput)
     const sequenceNames = Object.keys(parsedSequences)
     yield* put(parseAsync.done({ result: sequenceNames }))
@@ -240,7 +249,16 @@ export function* runAlgorithm(content?: File | string) {
   if (!treeFinalizeResult) {
     return undefined
   }
-  const { auspiceData, auspiceState } = treeFinalizeResult
+  const { auspiceData } = treeFinalizeResult
+
+  const auspiceState = createStateFromQueryOrJSONs({ json: auspiceData, query: {} })
+
+  // HACK: we are about to send the state object from this webworker process to the main process. However, `state.controls.colorScale.scale` is a function.
+  // This will not work currently, because transferring between webworker processes uses structured cloning algorithm and functions are not supported.
+  // https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm
+  // To workaround we unset the function here and set it back again (to a dummy one) on the other side.
+  // Ideally, the state should not contain functions. This is something to discuss in auspice upstream.
+  set(auspiceState, 'controls.colorScale.scale', undefined)
 
   // HACK: now that we are in the main process, we can re-attach the function we previously set to undefined in the worker process.
   // This is because transferring between webworker processes uses structured cloning algorithm and functions are not supported.

@@ -4,7 +4,7 @@
     "declarationDir": "./dist/types",
     "baseUrl": "./",
     "paths": {
-      "*": ["src/typings/*"],
+      //      "*": ["src/typings/*"],
       "src/*": ["./src/*"]
     },
     "target": "esnext",
@@ -19,7 +19,6 @@
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "preserveConstEnums": true,
@@ -29,9 +28,9 @@
     "sourceMap": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true
+    "isolatedModules": false
   },
-  "include": ["src/index.ts"],
+  "include": ["src/**/*.ts", "src/typings/**/*.d.ts"],
   "exclude": [
     ".build",
     ".cache",
@@ -42,6 +41,7 @@
     "node_modules",
     "public",
     "tsconfig.json",
-    "rollup.config.js"
+    "rollup.config.js",
+    ".eslintrc.js"
   ]
 }

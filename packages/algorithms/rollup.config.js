@@ -4,22 +4,16 @@ import json from '@rollup/plugin-json'
 import sourceMaps from 'rollup-plugin-sourcemaps'
 import typescript from 'rollup-plugin-typescript2'
 
-const pkg = require('./package.json')
+import pkg from './package.json'
 
 export default {
-  input: `src/index.ts`,
+  input: 'src/index.ts',
   output: [
     {
       file: pkg.main,
       format: 'cjs',
       sourcemap: true,
-      exports: 'named',
-    },
-    {
-      file: pkg.module,
-      format: 'es',
-      sourcemap: true,
-      exports: 'named',
+      // exports: 'named',
     },
   ],
   external: [],
@@ -32,13 +26,19 @@ export default {
       useTsconfigDeclarationDir: true,
       rollupCommonJSResolveHack: false,
       clean: true,
+      typescript: require('ttypescript'),
+      tsconfigDefaults: {
+        compilerOptions: {
+          plugins: [
+            { transform: 'typescript-transform-paths' },
+            { transform: 'typescript-transform-paths', afterDeclarations: true },
+          ],
+        },
+      },
     }),
     commonjs(),
-    resolve(),
-    sourceMaps({
-      include: ['index\.ts'],
-      exclude: [/.*\.d\.ts$/]
-    }), // prettier-ignore
+    resolve({ rootDir: './src' }),
+    sourceMaps(), // prettier-ignore
   ],
   onwarn: function (message) {
     if (/Circular dependency.*d3-interpolate/.test(message)) {

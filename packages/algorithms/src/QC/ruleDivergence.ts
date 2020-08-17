@@ -1,4 +1,4 @@
-import type { AnalysisResult, NucleotideSubstitution } from 'src//types'
+import type { AnalysisResult, NucleotideSubstitution } from 'src/types'
 
 export interface QCRulesConfigDivergence {
   divergenceMean: number

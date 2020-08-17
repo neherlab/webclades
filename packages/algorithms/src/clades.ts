@@ -1,8 +1,8 @@
 import { groupBy, uniqBy } from 'lodash'
 
-import type { Nucleotide, Substitutions, CladeDataFlat, CladeDataGrouped } from 'src//types'
+import type { Nucleotide, Substitutions, CladeDataFlat, CladeDataGrouped } from 'src/types'
 
-import { VIRUSES } from 'src//viruses'
+import { VIRUSES } from 'src/viruses'
 
 export function cladesFlatten(clades: Substitutions): CladeDataFlat[] {
   return Object.entries(clades).reduce((result, [cladeName, substitutions]) => {

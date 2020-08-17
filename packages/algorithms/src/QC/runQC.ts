@@ -2,7 +2,7 @@ import { merge } from 'lodash'
 
 import { DeepPartial } from 'ts-essentials'
 
-import type { AnalysisResult, NucleotideSubstitution } from 'src//types'
+import type { AnalysisResult, NucleotideSubstitution } from 'src/types'
 
 import { ruleMissingData, QCRulesConfigMissingData, QCResultMissingData } from './ruleMissingData'
 import { ruleMixedSites, QCRulesConfigMixedSites, QCResultMixedSites } from './ruleMixedSites'

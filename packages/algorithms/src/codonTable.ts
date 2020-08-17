@@ -1,5 +1,5 @@
 import { get } from 'lodash'
-import type { Aminoacid } from 'src//types'
+import type { Aminoacid } from 'src/types'
 
 const AMINOACID_UNKNOWN = ('X' as const) as Aminoacid
 

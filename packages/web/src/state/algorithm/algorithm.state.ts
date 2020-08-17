@@ -1,10 +1,9 @@
 import type { AnalysisResult } from '@neherlab/nextclade-algorithms'
 import type { Sorting } from 'src/helpers/sortResults'
 
-import { DEFAULT_ROOT_SEQUENCE } from '@neherlab/nextclade-algorithms'
+import { DEFAULT_ROOT_SEQUENCE, QCResult } from '@neherlab/nextclade-algorithms'
 // import { getFakeResults } from 'src/assets/data/getFakeResults'
 import { AuspiceJsonV2 } from 'auspice'
-import { QCResult } from '@neherlab/nextclade-algorithms'
 
 export interface InputFile {
   name: string

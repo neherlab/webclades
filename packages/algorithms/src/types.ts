@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import type { Tagged } from 'src/helpers/types'
-import { QCResult } from 'src//QC/runQC'
+import type { QCResult } from 'src/QC/runQC'
 
 /** Type-safe representation of a nucleotide */
 export type Nucleotide = Tagged<string, 'Nucleotide'>

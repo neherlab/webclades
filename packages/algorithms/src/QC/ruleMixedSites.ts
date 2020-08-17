@@ -1,6 +1,6 @@
 import { clamp } from 'lodash'
 
-import type { AnalysisResult, NucleotideSubstitution } from 'src//types'
+import type { AnalysisResult, NucleotideSubstitution } from 'src/types'
 
 export interface QCRulesConfigMixedSites {
   mixedSitesThreshold: number

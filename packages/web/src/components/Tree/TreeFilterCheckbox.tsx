@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import { applyFilter } from 'auspice/src/actions/tree'
 
-import { UNKNOWN_VALUE } from 'src/constants'
+import { UNKNOWN_VALUE } from '@neherlab/nextclade-algorithms'
 import type { AuspiceFiltersState } from 'src/state/auspice/auspice.state'
 import { selectTraitValueCount } from 'src/state/auspice/auspice.selectors'
 import type { State } from 'src/state/reducer'

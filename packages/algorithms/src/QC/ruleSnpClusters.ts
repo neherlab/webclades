@@ -1,6 +1,6 @@
 import { clamp } from 'lodash'
 
-import type { AnalysisResult, ClusteredSNPs, NucleotideSubstitution } from 'src//types'
+import type { AnalysisResult, ClusteredSNPs, NucleotideSubstitution } from 'src/types'
 
 export function findSNPClusters(
   { substitutions }: AnalysisResult,

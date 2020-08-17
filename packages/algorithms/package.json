@@ -2,14 +2,14 @@
   "name": "@neherlab/nextclade-algorithms",
   "version": "0.3.5",
   "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "browser": "dist/index.umd.js",
   "types": "dist/types/index.d.ts",
   "license": "MIT",
   "scripts": {
     "dev": "rm -rf dist/ && rollup -c -w"
   },
-  "dependencies": {},
+  "dependencies": {
+    "auspice": "2.17.4"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-json": "4.1.0",
@@ -17,7 +17,9 @@
     "prettier": "2.0.5",
     "rollup": "2.26.3",
     "rollup-plugin-sourcemaps": "0.6.2",
-    "rollup-plugin-typescript2": "0.27.2"
+    "rollup-plugin-typescript2": "0.27.2",
+    "ttypescript": "1.5.10",
+    "typescript-transform-paths": "1.1.15"
   },
   "resolutions": {
     "@babel/core": "7.10.5",

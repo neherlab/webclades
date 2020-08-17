@@ -21,7 +21,7 @@ import { State } from 'src/state/reducer'
 import { setTreeFilterPanelCollapsed } from 'src/state/ui/ui.actions'
 import { notUndefined } from 'src/helpers/notUndefined'
 import { TreeFilterCheckboxGroup } from 'src/components/Tree/TreeFilterCheckboxGroup'
-import { UNKNOWN_VALUE } from 'src/constants'
+import { UNKNOWN_VALUE } from '@neherlab/nextclade-algorithms'
 import { FilterBadges } from 'src/components/Tree/FilterBadges'
 
 export const Card = styled(ReactstrapCard)<ReactstrapCardProps>`

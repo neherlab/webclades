@@ -1,10 +1,10 @@
 import { get, pick } from 'lodash'
 
-import type { Gene } from 'src//types'
+import type { Gene } from 'src/types'
 import geneMapRaw from 'src/data/genomeAnnotationsFromNcovGlobal.json'
 import { GENOTYPE_COLORS } from 'src/constants'
 
-function getGeneMap(): Gene[] {
+export function getGeneMap(): Gene[] {
   const geneMap = get(geneMapRaw, 'genome_annotations')
 
   if (!geneMap) {
@@ -19,4 +19,4 @@ function getGeneMap(): Gene[] {
   })
 }
 
-export const geneMap = getGeneMap()
+export const geneMap: Gene[] = getGeneMap()

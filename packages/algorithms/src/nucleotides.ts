@@ -1,4 +1,4 @@
-import { Nucleotide } from 'src//types'
+import { Nucleotide } from 'src/types'
 
 /** Type-safe constants for the nucleotides we recognize */
 export const A = 'A' as Nucleotide
