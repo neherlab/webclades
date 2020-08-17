@@ -1,6 +1,6 @@
 import { get } from 'lodash'
 
-import { Nucleotide } from 'src/algorithms/types'
+import { Nucleotide } from '@neherlab/nextclade-algorithms'
 
 export const NUCLEOTIDE_COLORS: Record<string, string> = {
   'A': '#bf2b18',

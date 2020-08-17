@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { BASE_MIN_WIDTH_PX } from 'src/constants'
 
-import type { SubstitutionsWithAminoacids } from 'src/algorithms/types'
+import type { SubstitutionsWithAminoacids } from '@neherlab/nextclade-algorithms'
 
 import { getNucleotideColor } from 'src/helpers/getNucleotideColor'
 import { formatMutation } from 'src/helpers/formatMutation'

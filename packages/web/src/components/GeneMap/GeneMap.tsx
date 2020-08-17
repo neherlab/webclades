@@ -5,9 +5,9 @@ import styled from 'styled-components'
 
 import { BASE_MIN_WIDTH_PX } from 'src/constants'
 
-import type { Gene } from 'src/algorithms/types'
-import { geneMap } from 'src/algorithms/geneMap'
-import { cladesGrouped } from 'src/algorithms/clades'
+import type { Gene } from '@neherlab/nextclade-algorithms'
+import { geneMap } from '@neherlab/nextclade-algorithms'
+import { cladesGrouped } from '@neherlab/nextclade-algorithms'
 import { Tooltip } from 'src/components/Results/Tooltip'
 import { formatRange } from 'src/helpers/formatRange'
 import { getSafeId } from 'src/helpers/getSafeId'

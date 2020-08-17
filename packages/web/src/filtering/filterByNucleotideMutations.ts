@@ -3,7 +3,7 @@ import { intersectionWith } from 'lodash'
 import { parseMutation } from 'src/helpers/parseMutation'
 import { notUndefined } from 'src/helpers/notUndefined'
 import { SequenceAnalysisState } from 'src/state/algorithm/algorithm.state'
-import { NucleotideSubstitution } from 'src/algorithms/types'
+import { NucleotideSubstitution } from '@neherlab/nextclade-algorithms'
 
 import { splitFilterString } from './splitFilterString'
 

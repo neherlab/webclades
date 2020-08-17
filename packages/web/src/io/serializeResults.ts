@@ -5,8 +5,8 @@ import { formatClades } from 'src/helpers/formatClades'
 import { formatMutation } from 'src/helpers/formatMutation'
 import { formatRange } from 'src/helpers/formatRange'
 import { formatInsertion } from 'src/helpers/formatInsertion'
-// import { locateInTree } from 'src/algorithms/tree/locateInTree'
-// import { DEFAULT_ROOT_SEQUENCE } from 'src/algorithms/getRootSeq'
+// import { locateInTree } from '@neherlab/nextclade-algorithms'
+// import { DEFAULT_ROOT_SEQUENCE } from '@neherlab/nextclade-algorithms'
 
 export function prepareResultsJson(results: SequenceAnalysisState[]) {
   return results.map(({ seqName, status, errors, result }) => {

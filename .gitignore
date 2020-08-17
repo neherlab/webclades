@@ -7,4 +7,5 @@
 \.idea
 \.reports
 \.vscode
+dist
 node_modules

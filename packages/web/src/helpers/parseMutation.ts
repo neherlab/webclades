@@ -1,6 +1,6 @@
 /* eslint-disable security/detect-unsafe-regex */
-import type { Nucleotide, NucleotideSubstitution } from 'src/algorithms/types'
-import { ANY } from 'src/algorithms/nucleotides'
+import type { Nucleotide, NucleotideSubstitution } from '@neherlab/nextclade-algorithms'
+import { ANY } from '@neherlab/nextclade-algorithms'
 
 import { parsePosition } from './parsePosition'
 

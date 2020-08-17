@@ -2,7 +2,7 @@ import { round } from 'lodash'
 
 import type { DeepReadonly } from 'ts-essentials'
 
-import type { QCResultSNPClusters } from 'src/algorithms/QC/ruleSnpClusters'
+import type { QCResultSNPClusters } from '@neherlab/nextclade-algorithms'
 import type { TFunctionInterface } from 'src/helpers/TFunctionInterface'
 
 export function formatQCSNPClusters<TFunction extends TFunctionInterface>(

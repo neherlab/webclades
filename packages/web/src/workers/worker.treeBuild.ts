@@ -3,7 +3,7 @@ import 'regenerator-runtime'
 import type { FunctionThread } from 'threads'
 import { expose } from 'threads/worker'
 
-import { locateInTree } from '../algorithms/tree/locateInTree'
+import { locateInTree } from '@neherlab/nextclade-algorithms'
 
 expose(locateInTree)
 

@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import type { DeepReadonly } from 'ts-essentials'
 
-import type { NucleotideInsertion } from 'src/algorithms/types'
+import type { NucleotideInsertion } from '@neherlab/nextclade-algorithms'
 import { formatInsertion } from 'src/helpers/formatInsertion'
 import { truncateList } from 'src/components/Results/truncateList'
 

@@ -1,4 +1,4 @@
-import { Substitutions } from 'src/algorithms/types'
+import { Substitutions } from '@neherlab/nextclade-algorithms'
 import { last } from 'lodash'
 
 // eslint-disable-next-line only-ascii/only-ascii

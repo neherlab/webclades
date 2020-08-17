@@ -1,8 +1,8 @@
 import type { AuspiceState } from 'auspice'
 // import { createStateFromQueryOrJSONs } from 'auspice/src/actions/recomputeReduxState'
 //
-// import { locateInTree } from 'src/algorithms/tree/locateInTree'
-// import { DEFAULT_ROOT_SEQUENCE } from 'src/algorithms/getRootSeq'
+// import { locateInTree } from '@neherlab/nextclade-algorithms'
+// import { DEFAULT_ROOT_SEQUENCE } from '@neherlab/nextclade-algorithms'
 //
 // import { getFakeResults } from 'src/assets/data/getFakeResults'
 

@@ -3,7 +3,7 @@ import { intersectionWith } from 'lodash'
 import { parseAminoacidChange } from 'src/helpers/parseAminoacidChange'
 import { notUndefined } from 'src/helpers/notUndefined'
 import type { SequenceAnalysisState } from 'src/state/algorithm/algorithm.state'
-import type { AminoacidSubstitution } from 'src/algorithms/types'
+import type { AminoacidSubstitution } from '@neherlab/nextclade-algorithms'
 
 import { splitFilterString } from './splitFilterString'
 

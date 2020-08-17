@@ -3,7 +3,7 @@ import 'regenerator-runtime'
 import type { FunctionThread } from 'threads'
 import { expose } from 'threads/worker'
 
-import { analyze } from '../algorithms/run'
+import { analyze } from '@neherlab/nextclade-algorithms'
 
 expose(analyze)
 

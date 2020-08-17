@@ -54,7 +54,7 @@ export function getDomain() {
   if (DOMAIN === 'autodetect') {
     const interactive = isInteractive()
 
-    if (interactive && process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
       return devDomain
     }
 

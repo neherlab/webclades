@@ -10,7 +10,6 @@ export const URL_MANIFEST_JSON = `${DOMAIN}/manifest.json`
 export const SAFARI_PINNED_TAB_COLOR = '#555555' as const
 export const MS_TILE_COLOR = '#2b5797' as const
 
-export const UNKNOWN_VALUE = `Unknown ` // HACK: keep space at the end: workaround for Auspice filtering out "Unknown"
 export const BASE_MIN_WIDTH_PX = 4 as const
 export const EXPORT_CSV_FILENAME = 'nextclade.csv' as const
 export const EXPORT_JSON_FILENAME = 'nextclade.json' as const
@@ -20,21 +19,6 @@ export const URL_GITHUB = 'https://github.com/neherlab/webclades' as const
 export const URL_GITHUB_FRIENDLY = 'github.com/neherlab/webclades' as const
 
 export const TWITTER_USERNAME = '@nextstrain' as const
-
-// Borrowed from Nextstrain Auspice
-// https://github.com/nextstrain/auspice/blob/05efebfd5eba8a7d086132cf8a182176118b7c28/src/util/globals.js#L90-L92
-export const GENOTYPE_COLORS = [
-  '#60AA9E',
-  '#D9AD3D',
-  '#5097BA',
-  '#E67030',
-  '#8EBC66',
-  '#E59637',
-  '#AABD52',
-  '#DF4327',
-  '#C4B945',
-  '#75B681',
-] as const
 
 // Borrowed with modifications from Nextstrain.org
 // https://github.com/nextstrain/nextstrain.org/blob/master/static-site/src/components/splash/title.jsx

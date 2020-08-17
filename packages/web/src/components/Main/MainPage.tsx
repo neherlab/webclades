@@ -28,7 +28,7 @@ import { setShowInputBox } from 'src/state/ui/ui.actions'
 import { LinkExternal } from 'src/components/Link/LinkExternal'
 import { Subtitle, Title } from 'src/components/Main/Title'
 
-import DEFAULT_INPUT from 'src/assets/data/defaultSequencesWithGaps.fasta'
+import DEFAULT_INPUT from 'src/assets/data/exampleSequences.fasta'
 
 export interface MainProps {
   params: AlgorithmParams

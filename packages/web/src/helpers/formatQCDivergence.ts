@@ -2,7 +2,7 @@ import { round } from 'lodash'
 
 import type { DeepReadonly } from 'ts-essentials'
 
-import type { QCResultDivergence } from 'src/algorithms/QC/ruleDivergence'
+import type { QCResultDivergence } from '@neherlab/nextclade-algorithms'
 import type { TFunctionInterface } from 'src/helpers/TFunctionInterface'
 
 export function formatQCDivergence<TFunction extends TFunctionInterface>(

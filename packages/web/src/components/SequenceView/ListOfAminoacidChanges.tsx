@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { formatAAMutation } from 'src/helpers/formatMutation'
 
-import { AminoacidSubstitution } from 'src/algorithms/types'
+import { AminoacidSubstitution } from '@neherlab/nextclade-algorithms'
 
 export interface ListOfAminoacidChangesProps {
   readonly aminoacidChanges: DeepReadonly<AminoacidSubstitution[]>

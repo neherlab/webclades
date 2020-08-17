@@ -1,4 +1,4 @@
-import { AminoacidSubstitution, NucleotideSubstitution } from 'src/algorithms/types'
+import { AminoacidSubstitution, NucleotideSubstitution } from '@neherlab/nextclade-algorithms'
 
 export function formatMutation({ pos, queryNuc, refNuc }: NucleotideSubstitution) {
   // NOTE: by convention, nucleotides are numbered starting from 1, however our arrays are 0-based

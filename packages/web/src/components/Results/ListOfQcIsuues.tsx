@@ -3,7 +3,7 @@ import React from 'react'
 import { round } from 'lodash'
 import { useTranslation } from 'react-i18next'
 
-import type { QCResult } from 'src/algorithms/QC/runQC'
+import type { QCResult } from '@neherlab/nextclade-algorithms'
 import { notUndefined } from 'src/helpers/notUndefined'
 import { formatQCDivergence } from 'src/helpers/formatQCDivergence'
 import { formatQCSNPClusters } from 'src/helpers/formatQCSNPClusters'

@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 
 import styled from 'styled-components'
 
-import type { AnalysisResult } from 'src/algorithms/types'
+import type { AnalysisResult } from '@neherlab/nextclade-algorithms'
 
 import { getSafeId } from 'src/helpers/getSafeId'
 import { ColumnNameTooltip } from 'src/components/Results/ColumnNameTooltip'
-import { QCResult } from 'src/algorithms/QC/runQC'
+import { QCResult } from '@neherlab/nextclade-algorithms'
 
 export const SequenceName = styled.div`
   white-space: nowrap;

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { BASE_MIN_WIDTH_PX } from 'src/constants'
 
-import type { CladeDataGrouped } from 'src/algorithms/types'
+import type { CladeDataGrouped } from '@neherlab/nextclade-algorithms'
 import { getSafeId } from 'src/helpers/getSafeId'
 import { Tooltip } from 'src/components/Results/Tooltip'
 

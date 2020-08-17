@@ -3,7 +3,7 @@ import React from 'react'
 import { ReactResizeDetectorDimensions, withResizeDetector } from 'react-resize-detector'
 import styled from 'styled-components'
 
-import type { AnalysisResult } from 'src/algorithms/types'
+import type { AnalysisResult } from '@neherlab/nextclade-algorithms'
 
 import { SequenceMarkerGap } from './SequenceMarkerGap'
 import { SequenceMarkerMissing } from './SequenceMarkerMissing'

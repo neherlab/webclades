@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import type { DeepReadonly } from 'ts-essentials'
 
-import type { SubstitutionsWithAminoacids } from 'src/algorithms/types'
+import type { SubstitutionsWithAminoacids } from '@neherlab/nextclade-algorithms'
 import { formatMutation } from 'src/helpers/formatMutation'
 import { truncateList } from 'src/components/Results/truncateList'
 

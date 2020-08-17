@@ -6,9 +6,9 @@ import { push } from 'connected-next-router'
 import { Pool } from 'threads'
 import { call, all, getContext, put, select, takeEvery } from 'typed-redux-saga'
 
-import type { AnalysisParams, AnalysisResult } from 'src/algorithms/types'
-import type { FinalizeTreeParams, LocateInTreeParams } from 'src/algorithms/tree/locateInTree'
-import type { QCResult, QCRulesConfig, RunQCParams } from 'src/algorithms/QC/runQC'
+import type { AnalysisParams, AnalysisResult } from '@neherlab/nextclade-algorithms'
+import type { FinalizeTreeParams, LocateInTreeParams } from '@neherlab/nextclade-algorithms'
+import type { QCResult, QCRulesConfig, RunQCParams } from '@neherlab/nextclade-algorithms'
 import type { WorkerPools } from 'src/workers/types'
 import type { ParseThread } from 'src/workers/worker.parse'
 import type { AnalyzeThread } from 'src/workers/worker.analyze'
@@ -42,6 +42,7 @@ import {
 } from './algorithm.actions'
 import { selectParams, selectResults } from './algorithm.selectors'
 import { AlgorithmGlobalStatus } from './algorithm.state'
+import { readFile } from 'src/helpers/readFile'
 
 export interface RunParams extends WorkerPools {
   rootSeq: string
@@ -101,6 +102,14 @@ export function* runQcOne(params: ScheduleQcRunParams) {
   return result
 }
 
+export async function maybeReadFile(input: File | string) {
+  if (typeof input === 'string') {
+    return input
+  }
+
+  return readFile(input)
+}
+
 export interface ParseParams {
   threadParse: ParseThread
   input: File | string
@@ -109,7 +118,8 @@ export interface ParseParams {
 export function* parseSaga({ threadParse, input }: ParseParams) {
   yield* put(parseAsync.started())
   try {
-    const { input: newInput, parsedSequences } = yield* call(threadParse, input)
+    const newInput = maybeReadFile(input)
+    const parsedSequences = yield* call(threadParse, newInput)
     const sequenceNames = Object.keys(parsedSequences)
     yield* put(parseAsync.done({ result: sequenceNames }))
     return { input: newInput, parsedSequences }

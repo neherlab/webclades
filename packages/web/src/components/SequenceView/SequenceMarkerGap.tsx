@@ -3,12 +3,12 @@ import React, { SVGProps, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BASE_MIN_WIDTH_PX } from 'src/constants'
 
-import type { NucleotideDeletion } from 'src/algorithms/types'
+import type { NucleotideDeletion } from '@neherlab/nextclade-algorithms'
 import { getNucleotideColor } from 'src/helpers/getNucleotideColor'
 import { Tooltip } from 'src/components/Results/Tooltip'
 import { formatRange } from 'src/helpers/formatRange'
 import { getSafeId } from 'src/helpers/getSafeId'
-import { GAP } from 'src/algorithms/nucleotides'
+import { GAP } from '@neherlab/nextclade-algorithms'
 
 const gapColor = getNucleotideColor(GAP)
 

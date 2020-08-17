@@ -1,0 +1,15 @@
+{
+  "name": "@neherlab/nextclade",
+  "version": "0.3.5",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+   "dev": "yarn patch && lerna exec --parallel --no-stream --scope=@neherlab/nextclade-{algorithms,web} -- yarn run dev",
+    "patch": "bash -c './patches/patch.sh'"
+  },
+  "devDependencies": {
+    "lerna": "3.22.1"
+  }
+}

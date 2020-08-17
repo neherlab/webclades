@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import type { AnalysisResult } from 'src/algorithms/types'
+import type { AnalysisResult } from '@neherlab/nextclade-algorithms'
 import { getSafeId } from 'src/helpers/getSafeId'
 import { Tooltip } from 'src/components/Results/Tooltip'
 import { ListOfGaps } from 'src/components/Results/ListOfGaps'

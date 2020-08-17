@@ -2,7 +2,7 @@ import { round } from 'lodash'
 
 import type { DeepReadonly } from 'ts-essentials'
 
-import type { QCResultMixedSites } from 'src/algorithms/QC/ruleMixedSites'
+import type { QCResultMixedSites } from '@neherlab/nextclade-algorithms'
 import type { TFunctionInterface } from 'src/helpers/TFunctionInterface'
 
 export function formatQCMixedSites<TFunction extends TFunctionInterface>(

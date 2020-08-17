@@ -116,6 +116,7 @@ const withTypeChecking = getWithTypeChecking({
 
 const transpilationListDev = [
   // prettier-ignore
+  '@neherlab/nextclade-algorithms',
   'auspice',
   'd3-scale',
 ]

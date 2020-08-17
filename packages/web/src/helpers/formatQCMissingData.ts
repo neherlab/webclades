@@ -1,7 +1,7 @@
 import { round } from 'lodash'
 
 import type { DeepReadonly } from 'ts-essentials'
-import type { QCResultMissingData } from 'src/algorithms/QC/ruleMissingData'
+import type { QCResultMissingData } from '@neherlab/nextclade-algorithms'
 import { TFunctionInterface } from 'src/helpers/TFunctionInterface'
 
 export function formatQCMissingData<TFunction extends TFunctionInterface>(
