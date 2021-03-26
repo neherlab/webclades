@@ -1,7 +1,5 @@
-import { format } from 'url'
-
 import type { Router } from 'next/router'
-import { applyMiddleware, createStore, StoreEnhancer, Store, Middleware } from 'redux'
+import { applyMiddleware, createStore, Store, Middleware } from 'redux'
 
 import type { PersistorOptions, Persistor } from 'redux-persist/es/types'
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'
@@ -48,13 +46,12 @@ export async function configureStore({ router, workerPools }: ConfigureStorePara
   let enhancer = applyMiddleware(...middlewares)
   enhancer = withReduxDevTools(enhancer)
 
-  const { asPath, pathname, query } = router
+  const { asPath } = router
   let initialState = {}
   if (asPath) {
-    const url = format({ pathname, query })
     initialState = {
       ...initialState,
-      router: initialRouterState(url, asPath),
+      router: initialRouterState(asPath),
     }
   }
 
@@ -65,7 +62,7 @@ export async function configureStore({ router, workerPools }: ConfigureStorePara
 
   if (module.hot) {
     // Setup hot reloading of root reducer
-    module.hot.accept('./reducer', () => {
+    module.hot.accept(() => {
       store.replaceReducer(createRootReducer())
       console.info('[HMR] root reducer reloaded successfully')
     })
@@ -85,10 +82,6 @@ export async function configureStore({ router, workerPools }: ConfigureStorePara
   }
 
   return { store, persistor }
-}
-
-declare const window: Window & {
-  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: StoreEnhancer
 }
 
 declare const module: NodeHotModule

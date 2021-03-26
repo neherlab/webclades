@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { partition, isEmpty, get } from 'lodash'
 import { Button, Input } from 'reactstrap'
@@ -114,7 +114,7 @@ export function TreeFilterCheckboxGroupDisconnected({
   }
 
   const applySearch = useCallback(applySearchRaw, [values])
-  const [applySearchDebounced] = useDebouncedCallback(applySearchRaw, SEARCH_INPUT_DEBOUNCE_DELAY)
+  const { callback: applySearchDebounced } = useDebouncedCallback(applySearchRaw, SEARCH_INPUT_DEBOUNCE_DELAY)
 
   const onSearchTermChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

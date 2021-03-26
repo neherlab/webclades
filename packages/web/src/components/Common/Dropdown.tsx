@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Select, { ValueType, Props as SelectProps } from 'react-select'
 
 import { DropdownOption } from 'src/components/Common/DropdownOption'
@@ -39,14 +37,10 @@ export function Dropdown({
       value={value}
       theme={(theme) => ({ ...theme })}
       isMulti={false}
-      onChange={(option: ValueType<DropdownOption<string>>) => {
-        // FIXME: This is currently cannot be expressed without type errors due to a defect in typings
-        // See: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/32553
-        // See: https://github.com/JedWatson/react-select/issues/2902
+      onChange={(option: ValueType<DropdownOption<string>, false>) => {
         if (option) {
-          const optionCasted = option as DropdownOption<string>
-          onValueChange?.(optionCasted.value)
-          onOptionChange?.(optionCasted)
+          onValueChange?.(option.value)
+          onOptionChange?.(option)
         }
       }}
       onBlur={onBlur}

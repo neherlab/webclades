@@ -1,10 +1,9 @@
 import path from 'path'
 
-import { uniq } from 'lodash'
+import { get, set, uniq } from 'lodash'
 
 import type { NextConfig } from 'next'
 import getWithMDX from '@next/mdx'
-// import withBundleAnalyzer from '@zeit/next-bundle-analyzer'
 import withPlugins from 'next-compose-plugins'
 import getWithTranspileModules from 'next-transpile-modules'
 
@@ -13,22 +12,19 @@ import { getGitBranch } from '../../lib/getGitBranch'
 import { getBuildNumber } from '../../lib/getBuildNumber'
 import { getBuildUrl } from '../../lib/getBuildUrl'
 import { getGitCommitHash } from '../../lib/getGitCommitHash'
-
 import { getEnvVars } from './lib/getEnvVars'
+import { addWebpackConfig } from './lib/addWebpackConfig'
 
-import getWithExtraWatch from './withExtraWatch'
 import getWithFriendlyConsole from './withFriendlyConsole'
 import getWithLodash from './withLodash'
-import getWithStaticComprression from './webpackCompression'
 import getWithTypeChecking from './withTypeChecking'
+import withFriendlyChunkNames from './withFriendlyChunkNames'
+import withIgnore from './withIgnore'
+import withImages from './withImages'
 import withJson from './withJson'
 import withRaw from './withRaw'
 import withSvg from './withSvg'
-import withImages from './withImages'
-import withThreads from './withThreads'
-import withIgnore from './withIgnore'
 import withoutMinification from './withoutMinification'
-import withFriendlyChunkNames from './withFriendlyChunkNames'
 
 const {
   // BABEL_ENV,
@@ -76,6 +72,7 @@ const nextConfig: NextConfig = {
   },
   future: {
     excludeDefaultMomentLocales: true,
+    webpack5: true,
   },
   devIndicators: {
     buildActivity: false,
@@ -101,14 +98,7 @@ const withFriendlyConsole = getWithFriendlyConsole({
   progressBarColor: 'blue',
 })
 
-const withExtraWatch = getWithExtraWatch({
-  files: [path.join(moduleRoot, 'src/types/**/*.d.ts')],
-  dirs: [],
-})
-
 const withLodash = getWithLodash({ unicode: false })
-
-const withStaticComprression = getWithStaticComprression({ brotli: false })
 
 const withTypeChecking = getWithTypeChecking({
   typeChecking: ENABLE_TYPE_CHECKS,
@@ -124,48 +114,80 @@ const transpilationListDev = [
 
 const transpilationListProd = uniq([
   ...transpilationListDev,
-  '!d3-array/src/cumsum.js',
-  '@loadable',
-  'create-color',
   'd3-array',
   'debug',
-  'delay',
   'immer',
   'is-observable',
   'lodash',
   'observable-fns',
-  'p-min-delay',
-  'proper-url-join',
   'query-string',
-  'react-router',
-  'react-share',
   'recharts',
   'redux-saga',
-  'redux/es',
   'semver',
-  'split-on-first',
   'strict-uri-encode',
   'threads',
+  // '!d3-array/src/cumsum.js',
+  // '@loadable',
+  // 'create-color',
+  // 'delay',
+  // 'p-min-delay',
+  // 'proper-url-join',
+  // 'react-router',
+  // 'react-share',
+  // 'redux/es',
+  // 'split-on-first',
 ])
 
-const withTranspileModules = getWithTranspileModules(PRODUCTION ? transpilationListProd : transpilationListDev)
+const withTranspileModules = getWithTranspileModules(PRODUCTION ? transpilationListProd : transpilationListDev, {
+  unstable_webpack5: true,
+})
+
+/**
+ * Workaround for the warning:
+ * "
+ * HotModuleReplacementPlugin
+ * The configured output.hotUpdateMainFilename doesn't lead to unique filenames per runtime and HMR update differs between runtimes.
+ * This might lead to incorrect runtime behavior of the applied update.
+ * To fix this, make sure to include [runtime] in the output.hotUpdateMainFilename option, or use the default config.
+ * "
+ *
+ * See: https://github.com/vercel/next.js/issues/19865
+ */
+function withHmrWorkaround(nextConfig: NextConfig) {
+  return addWebpackConfig(nextConfig, (nextConfig, webpackConfig, options) => {
+    // The default Next.js `hotUpdateMainFilename` does not contain `[runtime]` placeholder. We add it here.
+    set(webpackConfig, 'output.hotUpdateMainFilename', 'static/webpack/[runtime].[fullhash].hot-update.json')
+    return webpackConfig
+  })
+}
+
+// Workaround for the warning:
+// "Watchpack Error (initial scan): Error: ENOTDIR: not a directory, scandir 'packages/web/node_modules/next/dist/next-server/lib/router/utils/resolve-rewrites.js'"
+function withWatchpackWorkaround(nextConfig: NextConfig) {
+  return addWebpackConfig(nextConfig, (nextConfig, webpackConfig, options) => {
+    const ignored = get(webpackConfig, 'watchOptions.ignored')
+    if (Array.isArray(ignored)) {
+      // The `node_modules` entry is incorrectly modified by `next-transpile-modules`. We restore the entry here.
+      set(webpackConfig, 'watchOptions.ignored', [...ignored, '**/node_modules/**'])
+    }
+    return webpackConfig
+  })
+}
 
 const config = withPlugins(
   [
+    [withHmrWorkaround],
+    [withWatchpackWorkaround],
     [withIgnore],
-    [withExtraWatch],
-    [withThreads],
     [withSvg],
     [withImages],
     [withRaw],
     [withJson],
-    // ANALYZE && [withBundleAnalyzer],
     [withFriendlyConsole],
     [withMDX, { pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'] }],
     [withLodash],
     [withTypeChecking],
     [withTranspileModules],
-    PRODUCTION && [withStaticComprression],
     PROFILE && [withoutMinification],
     [withFriendlyChunkNames],
   ].filter(Boolean),

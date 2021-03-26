@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -45,7 +45,7 @@ export const FormGroup = styled(ReactstrapFormGroup)`
 export interface NumericFieldProps extends InputProps {
   identifier: string
   label: string
-  value: number | typeof Infinity
+  value: number | typeof Number.POSITIVE_INFINITY
   min: number
   max: number
 

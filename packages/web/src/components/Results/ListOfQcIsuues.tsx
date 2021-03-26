@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { round } from 'lodash'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -22,9 +20,9 @@ export const QcListItemBase = styled.li`
   margin-top: 0.5rem;
 `
 
-export interface QcListItem extends React.HTMLProps<HTMLDListElement>, CircleProps {}
+export interface QcListItemProps extends React.HTMLProps<HTMLDListElement>, CircleProps {}
 
-export function QcListItem({ status, text, children }: QcListItem) {
+export function QcListItem({ status, text, children }: QcListItemProps) {
   return (
     <QcListItemBase>
       <span className="mr-2 align-content-center">
