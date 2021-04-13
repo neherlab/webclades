@@ -794,7 +794,7 @@ class serializer
         static constexpr auto d = std::numeric_limits<number_float_t>::max_digits10;
 
         // the actual conversion
-        std::ptrdiff_t len = (std::snprintf)(number_buffer.data(), number_buffer.size(), "%.*g", d, x);
+        std::ptrdiff_t len = (std::snprintf)(number_buffer.data(), number_buffer.size(), "%f", d, x);
 
         // negative value indicates an error
         JSON_ASSERT(len > 0);

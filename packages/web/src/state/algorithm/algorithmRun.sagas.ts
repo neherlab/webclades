@@ -141,8 +141,15 @@ export function* runAlgorithm() {
     return
   }
 
+  function jsonReplacer(key, value) {
+    if (value === 1) {
+      return '1.0'
+    }
+    return JSON.stringify(value)
+  }
+
   const auspiceDataPostprocessed = treePostProcess(auspiceDataNew)
-  yield* put(setOutputTree(JSON.stringify(auspiceDataPostprocessed, null, 2)))
+  yield* put(setOutputTree(JSON.stringify(auspiceDataPostprocessed, jsonReplacer, 2)))
   yield* setAuspiceState(auspiceDataPostprocessed)
   yield* put(treeFilterByNodeType(['New']))
   yield* put(setAlgorithmGlobalStatus(AlgorithmGlobalStatus.allDone))

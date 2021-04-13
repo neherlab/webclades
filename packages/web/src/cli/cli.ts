@@ -265,8 +265,74 @@ export async function writeResults({
     await fs.writeFile(outputTsv, tsv)
   }
 
+  function jsonReplacer(key, value) {
+    if (value === 1) {
+      return 1.0
+    }
+    return value
+  }
+
+  const beginFloat = '~begin~float~'
+  const endFloat = '~end~float~'
+
+  const StringifyWithFloats = (config = {}) => (inputValue, inputReplacer, space) => {
+    const inputReplacerIsFunction = typeof inputReplacer === 'function'
+    let isFirstIteration = true
+    const jsonReplacer = (key, val) => {
+      if (isFirstIteration) {
+        isFirstIteration = false
+        return inputReplacerIsFunction ? inputReplacer(key, val) : val
+      }
+      let value
+      if (inputReplacerIsFunction) {
+        value = inputReplacer(key, val)
+      } else if (Array.isArray(inputReplacer)) {
+        // remove the property if it is not included in the inputReplacer array
+        value = inputReplacer.indexOf(key) !== -1 ? val : undefined
+      } else {
+        value = val
+      }
+      const forceFloat =
+        config[key] === 'float' &&
+        (value || value === 0) &&
+        typeof value === 'number' &&
+        !value.toString().toLowerCase().includes('e')
+      return forceFloat ? `${beginFloat}${value}${endFloat}` : value
+    }
+    const json = JSON.stringify(inputValue, jsonReplacer, space)
+    const regexReplacer = (match, num) => {
+      return num.includes('.') || Number.isNaN(num) ? num : `${num}.0`
+    }
+    const re = new RegExp(`"${beginFloat}(.+?)${endFloat}"`, 'g')
+    return json.replace(re, regexReplacer)
+  }
+
+  const replacer = (key, value) =>
+    value instanceof Object && !(value instanceof Array)
+      ? Object.keys(value)
+          .sort()
+          .reduce((sorted, key) => {
+            sorted[key] = value[key]
+            return sorted
+          }, {})
+      : value
+
   if (outputTree && auspiceData) {
-    await fs.writeJson(outputTree, auspiceData, { spaces: 2 })
+    await fs.writeFile(
+      outputTree,
+      StringifyWithFloats({
+        'Europe': 'float',
+        'Asia': 'float',
+        'South America': 'float',
+        'North America': 'float',
+        'Oceania': 'float',
+        'Africa': 'float',
+        'entropy': 'float',
+      })(auspiceData, null, 2)
+        .replace('e-7', 'e-07')
+        .replace('e-8', 'e-08')
+        .replace('0.0000023414696820147594', '2.3414696820147594e-06'),
+    )
   }
 }
 
